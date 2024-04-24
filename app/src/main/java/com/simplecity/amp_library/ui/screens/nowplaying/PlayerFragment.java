@@ -461,10 +461,9 @@ public class PlayerFragment extends BaseFragment implements
         }
 
         String totalTimeString = StringUtils.makeTimeString(getContext(), song.duration / 1000);
-        if (!TextUtils.isEmpty(totalTimeString)) {
-            if (totalTime != null) {
+        if (!TextUtils.isEmpty(totalTimeString) && totalTime != null) {
                 totalTime.setText(totalTimeString);
-            }
+            
         }
 
         if (track != null) {

@@ -151,10 +151,9 @@ public class TaggerTask extends AsyncTask<Object, Integer, Boolean> {
                                 TaggerUtils.copyFile(temp, fileOutputStream);
                                 pfd.close();
                             }
-                            if (temp.delete()) {
-                                if (tempFiles.contains(temp)) {
+                            if (temp.delete() && tempFiles.contains(temp)) {
                                     tempFiles.remove(temp);
-                                }
+                                
                             }
                         }
                     }

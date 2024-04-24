@@ -51,7 +51,7 @@ public class SettingsParentFragment extends BaseNavigationController implements
         MiniPlayerLockManager.MiniPlayerLock {
 
     public static String ArgPreferenceResource = "preference_resource";
-    public static String ARG_TITLE = "title";
+    public static String ArgTitle = "title";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -67,7 +67,7 @@ public class SettingsParentFragment extends BaseNavigationController implements
     public static SettingsParentFragment newInstance(@XmlRes int preferenceResource, @StringRes int titleResId) {
         Bundle args = new Bundle();
         args.putInt(ArgPreferenceResource, preferenceResource);
-        args.putInt(ARG_TITLE, titleResId);
+        args.putInt(ArgTitle, titleResId);
         SettingsParentFragment fragment = new SettingsParentFragment();
         fragment.setArguments(args);
         return fragment;
@@ -80,7 +80,7 @@ public class SettingsParentFragment extends BaseNavigationController implements
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        titleResId = getArguments().getInt(ARG_TITLE);
+        titleResId = getArguments().getInt(ArgTitle);
         preferenceResource = getArguments().getInt(ArgPreferenceResource);
     }
 
@@ -384,10 +384,9 @@ public class SettingsParentFragment extends BaseNavigationController implements
 
             // Upgrade preference
             Preference upgradePreference = findPreference(SettingsManager.KEY_PREF_UPGRADE);
-            if (upgradePreference != null) {
-                if (ShuttleUtils.isUpgraded((ShuttleApplication) getContext().getApplicationContext(), settingsManager)) {
+            if (upgradePreference != null && ShuttleUtils.isUpgraded((ShuttleApplication) getContext().getApplicationContext(), settingsManager)) {
                     upgradePreference.setVisible(false);
-                }
+                
             }
         }
 

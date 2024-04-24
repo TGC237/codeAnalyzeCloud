@@ -45,8 +45,7 @@ public class DrawerLockManager {
         if (drawerLocks.contains(drawerLock)) {
             drawerLocks.remove(drawerLock);
         }
-        if (drawerLocks.isEmpty()) {
-            if (drawerLockController != null) {
+        if (!drawerLocks.isEmpty() && drawerLockController != null) {
                 drawerLockController.unlockDrawer();
             }
         }

@@ -161,10 +161,9 @@ public class MiniPlayerFragment extends BaseFragment {
 
             boolean consumed = gestureDetector.onTouchEvent(event);
 
-            if (!consumed) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (!consumed && event.getAction() == MotionEvent.ACTION_UP) {
                     v.performClick();
-                }
+                
             }
 
             return consumed;
