@@ -44,10 +44,24 @@ class PlaylistsRepository @Inject constructor(
     }
 
     override fun getAllPlaylists(songsRepository: SongsRepository): Observable<MutableList<Playlist>> {
-        val defaultPlaylistsObservable = Observable.fromCallable<List<Playlist>> {
-            val playlists = mutableListOf<Playlist>()
+    val defaultPlaylistsObservable = Observable.fromCallable<List<Playlist>> {
+        val playlists = mutableListOf<Playlist>()
+
+        // Todo: Hide Podcasts if there are no songs
+        val songsCount = songsRepository.getAllSongs().size
+        if (songsCount == 0) {
+            // Supprimer les playlists correspondant aux podcasts de la liste des playlists
+            playlists.removeIf { it.type == PlaylistType.PODCAST }
+        }
+
+        return@fromCallable playlists
+    }
+
+    return defaultPlaylistsObservable
+}
 
             // Todo: Hide Podcasts if there are no songs
+            
             playlists.add(getPodcastPlaylist())
             playlists.add(getRecentlyAddedPlaylist())
             playlists.add(getMostPlayedPlaylist())
