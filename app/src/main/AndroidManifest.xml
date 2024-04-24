@@ -132,7 +132,9 @@
             android:name=".ui.screens.search.voice.VoiceSearchActivity"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:theme="@style/TranslucentTheme">
+            android:theme="@style/TranslucentTheme"
+            android:permission="android.permission.RECORD_AUDIO">
+            
             <intent-filter>
                 <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
                 <category android:name="android.intent.category.DEFAULT"/>
