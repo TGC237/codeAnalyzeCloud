@@ -17,7 +17,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * <p>This calls listen to events that affect DSP function and responds to them.</p>
+ * <p>
+ * This calls listen to events that affect DSP function and responds to them.
+ * </p>
  * <ol>
  * <li>new audio session declarations</li>
  * <li>headset plug / unplug events</li>
@@ -94,7 +96,7 @@ public class Equalizer {
          */
         private Virtualizer virtualizer;
 
-        //        private final PresetReverb mPresetReverb;
+        // private final PresetReverb mPresetReverb;
 
         private short mEqNumPresets = -1;
         private short mEqNumBands = -1;
@@ -103,7 +105,7 @@ public class Equalizer {
             equalizer = new android.media.audiofx.Equalizer(1, sessionId);
             bassBoost = new BassBoost(1, sessionId);
             virtualizer = new Virtualizer(1, sessionId);
-            //            mPresetReverb = new PresetReverb(0, sessionId);
+            // mPresetReverb = new PresetReverb(0, sessionId);
         }
 
         /*
@@ -181,26 +183,26 @@ public class Equalizer {
             }
         }
 
-        //        public void enableReverb(boolean enable) {
-        //            if (enable != mPresetReverb.getEnabled()) {
-        //                if (!enable) {
-        //                    mPresetReverb.setPreset((short) 0);
-        //                }
-        //                mPresetReverb.setEnabled(enable);
-        //            }
-        //        }
+        // public void enableReverb(boolean enable) {
+        // if (enable != mPresetReverb.getEnabled()) {
+        // if (!enable) {
+        // mPresetReverb.setPreset((short) 0);
+        // }
+        // mPresetReverb.setEnabled(enable);
+        // }
+        // }
 
-        //        public void setReverbPreset(short preset) {
-        //            if (mPresetReverb.getEnabled() && mPresetReverb.getPreset() != preset) {
-        //                mPresetReverb.setPreset(preset);
-        //            }
-        //        }
+        // public void setReverbPreset(short preset) {
+        // if (mPresetReverb.getEnabled() && mPresetReverb.getPreset() != preset) {
+        // mPresetReverb.setPreset(preset);
+        // }
+        // }
 
         public void release() {
             equalizer.release();
             bassBoost.release();
             virtualizer.release();
-            //            mPresetReverb.release();
+            // mPresetReverb.release();
         }
     }
 
@@ -322,19 +324,21 @@ public class Equalizer {
             Log.e(TAG, "Error enabling bass boost!", e);
         }
 
-        //        try {
-        //            short preset = Short.decode(sharedPreferences.getString("audiofx.reverb.preset", String.valueOf(PresetReverb.PRESET_NONE)));
-        //            session.enableReverb(globalEnabled && (preset > 0));
-        //            session.setReverbPreset(preset);
+        // try {
+        // short preset =
+        // Short.decode(sharedPreferences.getString("audiofx.reverb.preset",
+        // String.valueOf(PresetReverb.PRESET_NONE)));
+        // session.enableReverb(globalEnabled && (preset > 0));
+        // session.setReverbPreset(preset);
         //
-        //        } catch (Exception e) {
-        //            Log.e(TAG, "Error enabling reverb preset", e);
-        //        }
+        // } catch (Exception e) {
+        // Log.e(TAG, "Error enabling reverb preset", e);
+        // }
 
         try {
             session.enableEqualizer(globalEnabled);
             final int customPresetPos = session.getNumEqualizerPresets();
-            final int preset = Integer.valueOf(mPrefs.getString("audiofx.eq.preset", String.valueOf(customPresetPos)));
+            final int preset = Integer.parseInt(mPrefs.getString("audiofx.eq.preset", String.valueOf(customPresetPos)));
             final int bands = session.getNumEqualizerBands();
 
             /*
@@ -373,7 +377,7 @@ public class Equalizer {
     public void closeEqualizerSessions(boolean internal, int audioSessionId) {
 
         if (internal) {
-            //Close the internal audio session
+            // Close the internal audio session
             Intent intent = new Intent(Equalizer.ACTION_CLOSE_EQUALIZER_SESSION);
             intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId);
             intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.getPackageName());
@@ -384,7 +388,7 @@ public class Equalizer {
             intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId);
             context.sendBroadcast(intent);
 
-            //Close any external audio sessions on session 0
+            // Close any external audio sessions on session 0
             intent = new Intent(AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
             intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.getPackageName());
             intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, 0);
@@ -397,7 +401,8 @@ public class Equalizer {
         final Intent intent = new Intent();
         intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId);
         intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, context.getPackageName());
-        intent.setAction(internal ? Equalizer.ACTION_OPEN_EQUALIZER_SESSION : AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
+        intent.setAction(internal ? Equalizer.ACTION_OPEN_EQUALIZER_SESSION
+                : AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
         context.sendBroadcast(intent);
     }
 }
