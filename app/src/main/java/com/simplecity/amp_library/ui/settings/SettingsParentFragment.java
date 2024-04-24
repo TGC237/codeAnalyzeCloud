@@ -50,7 +50,7 @@ public class SettingsParentFragment extends BaseNavigationController implements
         DrawerLockManager.DrawerLock,
         MiniPlayerLockManager.MiniPlayerLock {
 
-    public static String ARG_PREFERENCE_RESOURCE = "preference_resource";
+    public static String ArgPreferenceResource = "preference_resource";
     public static String ARG_TITLE = "title";
 
     @BindView(R.id.toolbar)
@@ -66,7 +66,7 @@ public class SettingsParentFragment extends BaseNavigationController implements
 
     public static SettingsParentFragment newInstance(@XmlRes int preferenceResource, @StringRes int titleResId) {
         Bundle args = new Bundle();
-        args.putInt(ARG_PREFERENCE_RESOURCE, preferenceResource);
+        args.putInt(ArgPreferenceResource, preferenceResource);
         args.putInt(ARG_TITLE, titleResId);
         SettingsParentFragment fragment = new SettingsParentFragment();
         fragment.setArguments(args);
@@ -81,7 +81,7 @@ public class SettingsParentFragment extends BaseNavigationController implements
         super.onAttach(context);
 
         titleResId = getArguments().getInt(ARG_TITLE);
-        preferenceResource = getArguments().getInt(ARG_PREFERENCE_RESOURCE);
+        preferenceResource = getArguments().getInt(ArgPreferenceResource);
     }
 
     @Override
@@ -153,13 +153,13 @@ public class SettingsParentFragment extends BaseNavigationController implements
 
         public static FragmentInfo getFragmentInfo(@XmlRes int preferenceResource) {
             Bundle args = new Bundle();
-            args.putInt(ARG_PREFERENCE_RESOURCE, preferenceResource);
+            args.putInt(ArgPreferenceResource, preferenceResource);
             return new FragmentInfo(SettingsFragment.class, args, "settingsRoot");
         }
 
         public static SettingsFragment newInstance(@XmlRes int preferenceResource) {
             Bundle args = new Bundle();
-            args.putInt(ARG_PREFERENCE_RESOURCE, preferenceResource);
+            args.putInt(ArgPreferenceResource, preferenceResource);
             SettingsFragment settingsFragment = new SettingsFragment();
             settingsFragment.setArguments(args);
             return settingsFragment;
@@ -172,7 +172,7 @@ public class SettingsParentFragment extends BaseNavigationController implements
         public void onAttach(Context context) {
             super.onAttach(context);
 
-            preferenceResource = getArguments().getInt(ARG_PREFERENCE_RESOURCE);
+            preferenceResource = getArguments().getInt(ArgPreferenceResource);
         }
 
         @Override
