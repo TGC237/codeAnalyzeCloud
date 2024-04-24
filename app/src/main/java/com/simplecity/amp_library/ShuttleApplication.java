@@ -74,8 +74,11 @@ public class ShuttleApplication extends DaggerApplication {
 
     private RefWatcher refWatcher;
 
-    public HashMap<String, UserSelectedArtwork> userSelectedArtwork = new HashMap<>();
-
+    public static void setUserSelectedArtwork(HashMap<String, UserSelectedArtwork> artwork) {
+        userSelectedArtwork.clear();
+        userSelectedArtwork.putAll(artwork);
+    }
+    
     private static Logger jaudioTaggerLogger1 = Logger.getLogger("org.jaudiotagger.audio");
     private static Logger jaudioTaggerLogger2 = Logger.getLogger("org.jaudiotagger");
 
